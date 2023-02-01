@@ -1,0 +1,17 @@
+[
+    {
+      "name": "Jose Antonio",
+      "nif": "456563434R",
+      "apellidos": "Morgado",
+      "direccion": "c/La pepa",
+      "ciudad": "Almeria",
+      "localidad": "Huércal Overa"
+    },
+    {
+      "nombre": "Ana",
+      "apellidos": "Sanchez",
+      "direccion": "c/Pepito de los palotes n2",
+      "ciudad": "Madrid",
+      "localidad": "Alcalá de Henares"
+    }
+  ]
