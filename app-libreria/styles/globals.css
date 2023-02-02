@@ -1,3 +1,18 @@
 h1{
     color: red;
 }
+
+header{
+    height: 70px;
+    background-color: blue;
+}
+
+main{
+    height: 600px;
+    background-color: azure;
+}
+
+header{
+    height: 70px;
+    background-color: gray;
+}
