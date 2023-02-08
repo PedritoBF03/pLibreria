@@ -1,12 +1,12 @@
-import { MainLayouts } from '../../layouts/MainLayouts';
+import { PublicLayouts } from '../../layouts/PublicLayouts';
 
 const indexEditoresPage = () => {
   return (
-    <MainLayouts>
+    <PublicLayouts>
         <div>
             <h2>Editores</h2>
         </div>
-    </MainLayouts>
+    </PublicLayouts>
   )
 }
 

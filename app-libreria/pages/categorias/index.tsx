@@ -1,12 +1,12 @@
-import { MainLayouts } from "../../layouts/MainLayouts"
+import { PublicLayouts } from "../../layouts/PublicLayouts"
 
 const indexCategoriasPage = () => {
   return (
-    <MainLayouts>
+    <PublicLayouts>
         <div>
             <h2>Categorias</h2>
         </div>
-    </MainLayouts>
+    </PublicLayouts>
     
   )
 }

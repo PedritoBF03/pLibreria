@@ -1,7 +1,7 @@
 
 import { NextPage } from "next"
 // import { NavBar } from "../components/commons";
-import { MainLayouts } from "../layouts";
+import { PublicLayouts } from "../layouts";
 
 
 
@@ -10,10 +10,10 @@ const indexPage: NextPage = () => {
 
 
   return (
-    <MainLayouts>
+    <PublicLayouts>
       {/* <NavBar /> */}
       <h2>Libreria Picasso </h2>
-    </MainLayouts>
+    </PublicLayouts>
   )
 }
 
