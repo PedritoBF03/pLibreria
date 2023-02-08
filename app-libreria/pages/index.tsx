@@ -1,7 +1,8 @@
 
 import { NextPage } from "next"
+// import { NavBar } from "../components/commons";
 import { MainLayouts } from "../layouts";
-import { NavBar } from '../components/commons';
+
 
 
 //NextPage --> indica que es un proyecto Next y no Reac
@@ -10,7 +11,7 @@ const indexPage: NextPage = () => {
 
   return (
     <MainLayouts>
-      <NavBar />
+      {/* <NavBar /> */}
       <h2>Libreria Picasso </h2>
     </MainLayouts>
   )
