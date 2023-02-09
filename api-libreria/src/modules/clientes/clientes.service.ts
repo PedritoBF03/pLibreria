@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -30,7 +31,7 @@ export class ClientesService {
   }
 
   findAll() {
-    return `This action returns all clientes`;
+    return this.clienteRepository.find({});
   }
 
   findOne(id:string) {

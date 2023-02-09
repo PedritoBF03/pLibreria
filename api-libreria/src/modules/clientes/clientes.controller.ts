@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ClientesService } from './clientes.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
