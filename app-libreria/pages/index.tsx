@@ -16,6 +16,8 @@ const indexPage: NextPage = () => {
   console.log(isLoading, "c=", clientes);
   return (
     <PublicLayouts>
+      
+      <h2>Public Libreria Picasso </h2>
 
       {/* {
         (isLoading )

@@ -2,11 +2,6 @@ h1{
     color: red;
 }
 
-header{
-    height: 70px;
-    background-color: blue;
-}
-
 main{
     height: 600px;
     background-color: azure;
@@ -14,5 +9,11 @@ main{
 
 header{
     height: 70px;
-    background-color: gray;
+    /* background-color: blue; */
 }
+
+/* 
+header{
+    height: 70px;
+    background-color: gray;
+} */
