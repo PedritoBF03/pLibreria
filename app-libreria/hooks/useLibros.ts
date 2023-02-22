@@ -1,6 +1,6 @@
 import useSWR, { SWRConfiguration } from 'swr';
 import { ICliente } from '../interfaces/clientes';
-import { ILibro } from '../interfaces/libros';
+import { ILibro } from '../interfaces/libros/ILibros';
 
 
 export const useLibros = (url: string, config: SWRConfiguration = {}) => {
