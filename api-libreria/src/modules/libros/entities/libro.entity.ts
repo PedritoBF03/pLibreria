@@ -1,56 +1,91 @@
-import { Cliente } from "src/modules/clientes/entities/cliente.entity";
-import { Entity, PrimaryGeneratedColumn, Column, CannotGetEntityManagerNotConnectedError, OneToOne, ManyToOne } from "typeorm";
+import { profile } from "console";
+import { Profile } from "src/modules/profile/entities/profile.entity";
+import { BeforeInsert, Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Cliente } from '../../clientes/entities/cliente.entity';
+import { Categoria } from '../../categorias/entities/categoria.entity';
+import { Autor } from '../../autores/entities/autor.entity';
 
-@Entity({ name: 'libros' })
+@Entity()
 export class Libro {
 
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    idCliente: string;
 
-    @Column('text', { unique: true })
+    @Column('text', { 
+        unique: true
+    })
     title: string;
 
-    @Column('text', { unique: true })
+    @Column('text', { 
+        unique: true
+    })
     isbn: string;
 
-    @Column('int', {default:0})
+    @Column({
+        type: 'int',
+        default: 0
+    } )
     pageCount: number;
 
-    @Column('text', { unique: true })
+    @Column('date')
     publishedDate: string;
 
-    @Column('text', { unique: true })
+    @Column('text' )
     thumbnailUrl: string;
 
-    @Column('text', {nullable:true })
+    @Column('text',{
+        nullable: true
+    } )
     shortDescription: string;
 
-    @Column('text', { unique: true })
+    @Column('text', {
+        nullable: true
+    } )
     longDescription: string;
 
-    @Column('text', { unique: true })
+    @Column('text' )
     status: string;
 
+    @Column('numeric', {
+        nullable: true
+    })
+    precio: number;
 
-    //Relaciones
-    //Muchos a uno
     @ManyToOne(
         () => Cliente,
         (cliente) => cliente.libros,
         { cascade: false }
     )
-    cliente?: Cliente;
+    cliente?: Cliente
+
+    @ManyToOne(
+        () => Categoria,
+        (categoria) => categoria.libros,
+        { cascade: false }
+    )
+    categoria?:Categoria
+    
+    @ManyToOne(
+        () => Autor,
+        (autor) => autor.libros,
+        {cascade: true}
+    )
+    autor?: Autor
+
+    @BeforeInsert()
+    checkTitle(){
+        this.title = this.title.toUpperCase()
+    }
+
+    @BeforeInsert()
+    precioIva(){
+        this.precio = this.precio*1.21;
+    }
+
+
+
+
+
+
 
 }
-
-
-// {
-//     "name": "Stilton: En el reino de la fantasía: ¡Libro con olores! (Geronimo Stilton)",
-//     "editorial": "PLANETA S. A., EDITORIAL",
-//     "isbn": "8408060996",
-//     "pageCount": "384",
-//     "publishedDate": "3 noviembre 2005",
-//     "thumbnailUrl": "https://www.amazon.es/Stilton-En-reino-fantas%C3%ADa-Geronimo/dp/8408060996",
-//     "longDescription": "Nacido en Ratonia (Isla de los Ratones), Geronimo Stilton es licenciado en Ratología de la Literatura Ratónica y en Filosofía Arqueorratónica Comparada. Desde hace veinte años dirige El Eco del Roedor, el periódico con más difusión de Ratonia.Ha sido galardonado con el premio Ratitzer por su reportaje El misterio del tesoro desaparecido.Geronimo obtuvo también el premio Andersen 2001 como personaje del año y uno de sus libros ganó el premio eBook Award 2002 como mejor libro electrónico de literatura juvenil.En su tiempo libre, Stilton colecciona cortezas de parmesano del Renacimiento, juega al golf, pero sobre todo adora contarle cuentos a su sobrino Benjamín...",
-//     "status": "PUBLISH"
-// }

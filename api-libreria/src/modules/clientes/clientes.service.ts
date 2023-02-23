@@ -1,10 +1,10 @@
-/* eslint-disable prettier/prettier */
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { Cliente } from './entities/cliente.entity';
+import { Libro } from '../libros/entities/libro.entity';
 
 @Injectable()
 export class ClientesService {
@@ -13,7 +13,7 @@ export class ClientesService {
     @InjectRepository(Cliente)
     private readonly clienteRepository: Repository<Cliente>
   ){
-
+    
   }
 
   async create(createClienteDto: CreateClienteDto) {
@@ -27,29 +27,50 @@ export class ClientesService {
       console.log(error);
       throw new InternalServerErrorException('Ayuda')
     }
-    // return 'This action adds a new cliente';
   }
 
   findAll() {
     return this.clienteRepository.find({});
   }
 
-  findOne(id:string) {
+  findOne(nif: string) {
     return this.clienteRepository.findOne({
       where: { 
-        id 
+        nif 
       },
       relations: {
-        libros: true
+          libros: false,
       }
-    });  
+    });
   }
 
-  update(id: string, updateClienteDto: UpdateClienteDto) {
+  update(id: number, updateClienteDto: UpdateClienteDto) {
     return `This action updates a #${id} cliente`;
   }
 
-  remove(id: string) {
+  remove(id: number) {
     return `This action removes a #${id} cliente`;
   }
+
+  async deleteAllClientes(){
+    const query = this.clienteRepository.createQueryBuilder('cliente');
+    try {
+      return await query
+        .delete()
+        .where({})
+        .execute()
+
+    }catch(error){
+      this.handleDBErrors (error)
+    }
+  }
+
+
+  private handleDBErrors (error: any): never{
+    if (error.code === '23505')
+      throw new BadRequestException(error.detail)
+    
+    throw new InternalServerErrorException('Please Check Server Error ...')
+  }
+  
 }

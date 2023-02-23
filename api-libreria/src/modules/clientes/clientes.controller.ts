@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ClientesService } from './clientes.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
@@ -25,11 +24,11 @@ export class ClientesController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateClienteDto: UpdateClienteDto) {
-    return this.clientesService.update(id, updateClienteDto);
+    return this.clientesService.update(+id, updateClienteDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.clientesService.remove(id);
+    return this.clientesService.remove(+id);
   }
 }

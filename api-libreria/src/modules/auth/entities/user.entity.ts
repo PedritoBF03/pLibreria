@@ -1,9 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Cliente } from '../../clientes/entities/cliente.entity';
 
 @Entity('users')
 export class User {
 
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn('increment')
     id:string;
 
     @Column('text', { unique: true })
@@ -14,7 +15,13 @@ export class User {
 
     @Column('text')
     fullName: string;
-
+    
+    // @Column('text')
+    // nif: string;
+    @OneToOne(
+        () => Cliente,
+        (cliente) => cliente.user
+    )
     @Column('bool', { default: true })
     isActive: boolean;
 
@@ -22,5 +29,9 @@ export class User {
         array: true,
         default: ['user']
     })
-    roles: string[]
+    roles: string[];
+
+    
+    @JoinColumn()
+    cliente?: Cliente
 }

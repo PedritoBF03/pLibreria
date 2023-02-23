@@ -1,11 +1,13 @@
+import { User } from "src/modules/auth/entities/user.entity";
 import { Libro } from "src/modules/libros/entities/libro.entity";
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Profile } from "src/modules/profile/entities/profile.entity";
+import { BeforeInsert, Column, Entity, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name: 'clientes'})
+@Entity()
 export class Cliente {
-    
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+
+    @PrimaryColumn()
+    nif: string;
 
     @Column('text', { unique: true} )
     nombre: string;
@@ -22,38 +24,30 @@ export class Cliente {
     @Column('text',{ nullable: true })
     localidad: string;
 
-    // @OneToOne(
-    //     (type) => Profile,
-    //     (profile) => profile.cliente,
-    //     { cascade: false }
-    // )
-    // profile?: Profile;
-    
-    // @PrimaryGeneratedColumn('uuid')
-    // id: string;
+    @OneToOne(
+        (type) => User,
+        (user) => user.cliente,
+        { cascade: false }
+    )
+    user?: User;
 
-    // @Column('text', { unique: true })
-    // name: string;
-
-    // @Column('text', { unique: true })
-    // email: string;
-
-    // @Column('text', { nullable: true })
-    // github: string;
-
-    // @Column('text', { nullable: true })
-    // twitter: string;
-
-
-    //Relaciones
-    //Uno a muchos
     @OneToMany(
         () => Libro,
         (Libro) => Libro.cliente,
-        { cascade: false }
+        { cascade: false, eager: false  }
+
+        // { cascade: false, eager: true  }
     )
     libros?: Libro[];
 
 
 
+    // @BeforeInsert()
+    // checkGithub(){
+    //     if (!this.github.includes('https://github.com/')){
+    //         this.github = `https://github.com/${this.github}`
+    //     }
+    // }
+
+   
 }
