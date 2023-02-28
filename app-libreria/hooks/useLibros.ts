@@ -1,5 +1,5 @@
 import useSWR, { SWRConfiguration } from 'swr';
-import { ICliente } from '../interfaces/clientes';
+import { ICliente } from '../interfaces/clientes/IClientes';
 import { ILibro } from '../interfaces/libros/ILibros';
 
 
